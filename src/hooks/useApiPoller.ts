@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-const API_BASE = 'http://187.124.71.183:8080';
+const API_BASE = 'https://hermes.187.124.71.183.nip.io/api';
 
 export interface ApiState<T> {
   data: T | null;
@@ -30,11 +30,14 @@ export function useApiPoller<T>(
   const fetchData = useCallback(async () => {
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 5000);
+      const timeout = setTimeout(() => controller.abort(), 8000);
 
       const res = await fetch(`${API_BASE}${endpoint}`, {
         signal: controller.signal,
-        headers: { Accept: 'application/json' },
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer 22a158acbfc540e72ee95318dd1dc3d2a07d4032cedc3c3081897e6832dd83ac',
+        },
       });
 
       clearTimeout(timeout);
@@ -100,7 +103,11 @@ export async function apiPost(endpoint: string, body: object): Promise<{ success
   try {
     const res = await fetch(`${API_BASE}${endpoint}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: 'Bearer 22a158acbfc540e72ee95318dd1dc3d2a07d4032cedc3c3081897e6832dd83ac',
+      },
       body: JSON.stringify(body),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
