@@ -1,0 +1,38 @@
+/* Agent Wave Container */
+.wave-container__row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  height: 10px;
+  margin-bottom: 4px;
+}
+
+.wave-container__col {
+  background: linear-gradient(180deg, rgba(0, 255, 255, 0.6) 0%, rgba(0, 255, 255, 0.1) 100%);
+  width: 4px;
+  height: 10px;
+  border-radius: 4px;
+  transform: scaleY(0);
+  will-change: transform;
+  opacity: 0;
+}
+
+/* Noise panel fallback */
+.noise-panel {
+  background-color: #0B0D10;
+  background-image: paint(random-noise);
+  --rebeccapurple: #0B0D10;
+  --white: rgba(255, 255, 255, 0.05);
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 255, 255, 0.2);
+  color: white;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 1px solid rgba(0, 255, 255, 0.5);
+  outline-offset: 2px;
+}
